@@ -1,0 +1,418 @@
+{
+  "url": "gini.health",
+  "profile": {
+    "company_name": "Gini Health",
+    "one_liner": "Gini offers needle-free, at-home blood testing for women, timed to the menstrual cycle, with doctor-reviewed results and clear next steps.",
+    "product": "A pre-launch kit of two at-home, needle-free blood collections (FDA-cleared device, CLIA/CAP lab) timed to the user's cycle. It covers a panel of about 24 markers, including reproductive hormones, thyroid, HbA1c, lipids/ApoB, ferritin, hsCRP, kidney/liver and vitamin D. Results are interpreted alongside cycle and symptoms, doctor-reviewed, and paired with guidance on what to discuss with a physician.",
+    "customers": "Consumer women (direct-to-consumer, HSA/FSA eligible) with symptoms such as fatigue, weight gain, irregular periods, acne/hirsutism, hair thinning or hot flashes. Named segments include women exploring PCOS/PMOS, women in perimenopause, women on GLP-1s, and women wanting a health baseline. The waitlist has 5,000+ sign-ups.",
+    "value_prop": "Cycle-aware timing with two draws gives hormone results proper context, which single-draw tests lack. It is convenient and needle-free at home, with physician-reviewed, plain-language interpretation and next steps.",
+    "gaps": [
+      "Clinical care/telehealth partner to diagnose, prescribe and treat (e.g., PCOS, perimenopause HRT) beyond 'wellness insights'",
+      "Distribution via employers, women's health benefits platforms and payers, since the company is pre-launch, DTC and waitlist-only",
+      "Referral channels from OB-GYNs, fertility clinics and GLP-1/weight-management programs",
+      "Integrations with cycle-tracking apps and wearables for cycle timing and symptom data",
+      "Brand trust and reach beyond founder Instagram (@doctor.kenza) via established women's health brands"
+    ],
+    "geography": "Likely United States (HSA/FSA, CLIA, HIPAA, FDA references); not explicitly stated",
+    "domain": "gini.health"
+  },
+  "categories": [
+    {
+      "name": "Menopause & perimenopause telehealth clinics",
+      "rationale": "They need accurate, cycle-aware hormone and metabolic labs to diagnose and prescribe HRT, and Gini supplies pre-qualified patients and convenient at-home testing, which fills Gini's clinical care gap.",
+      "contact_role": "Head of Partnerships",
+      "queries": [
+        "telehealth company prescribing hormone therapy for menopause and perimenopause women",
+        "online menopause clinic virtual HRT prescriptions"
+      ]
+    },
+    {
+      "name": "PCOS & hormonal health virtual care providers",
+      "rationale": "PCOS-focused clinics need two-draw hormone context for diagnosis and can treat the women Gini identifies, turning insights into care and recurring revenue.",
+      "contact_role": "VP of Business Development",
+      "queries": [
+        "virtual clinic specializing in PCOS treatment for women",
+        "telehealth women's hormonal health care irregular periods acne hair loss"
+      ]
+    },
+    {
+      "name": "GLP-1 weight-management telehealth programs",
+      "rationale": "These programs must run baseline and monitoring labs (HbA1c, lipids, thyroid), and women on GLP-1s gain from hormone-aware tracking that improves outcomes and retention.",
+      "contact_role": "Director of Clinical Partnerships",
+      "queries": [
+        "telehealth company prescribing GLP-1 weight loss medication with lab testing",
+        "online medical weight loss program semaglutide tirzepatide"
+      ]
+    },
+    {
+      "name": "Women's health & fertility benefits platforms",
+      "rationale": "Employer-funded women's health platforms want differentiated, measurable services for menopause and hormonal health, which gives Gini B2B distribution beyond its DTC waitlist.",
+      "contact_role": "Head of Partnerships",
+      "queries": [
+        "employer benefits platform for women's health fertility and menopause",
+        "women's health benefits company for employers family planning menopause support"
+      ]
+    },
+    {
+      "name": "Cycle-tracking apps & women's wearables",
+      "rationale": "Period trackers and wearables already hold cycle and symptom data, so they can monetize engaged users with lab testing, while Gini gains timing data and reach.",
+      "contact_role": "VP of Partnerships",
+      "queries": [
+        "period and fertility tracking app for women",
+        "wearable device tracking menstrual cycle temperature and hormones"
+      ]
+    },
+    {
+      "name": "Fertility clinics & OB-GYN practice networks",
+      "rationale": "Clinics can use convenient at-home pre-visit hormone panels to streamline workups and gain referrals, and Gini gets physician referral channels and credibility.",
+      "contact_role": "Practice Growth or Business Development Director",
+      "queries": [
+        "fertility clinic network IVF egg freezing locations",
+        "OB-GYN practice group women's health network multiple locations"
+      ]
+    }
+  ],
+  "partners": [
+    {
+      "id": "midi-health-0",
+      "name": "Midi Health",
+      "category": "Menopause & perimenopause telehealth clinics",
+      "fit_score": 10,
+      "why": "Fast-growing insurance-covered perimenopause clinic gains cycle-timed hormone and metabolic labs plus pre-qualified patients ready for HRT visits.",
+      "contact_role": "Head of Partnerships",
+      "website": "https://joinmidi.com",
+      "source_url": "https://www.joinmidi.com/",
+      "source_title": "Midi Health",
+      "evidence": "# Midi Health Midi Health is a Hospitals and Health Care company. Meet Midi is a virtual care clinic created by specialists in perimenopause and menopause. They offer insurance-covered care and provide a range of care plans for women. Midi Health employs 798 people (+66.9% YoY, +320 people) and has an annual revenue of $1M, founded in 2021. Headquartered in Palo Alto, California, United States, with an office in Menlo Park. Its workforce is distributed across 6 countries (including United States, India, France, Philippines, and Spain). ## About Midi Health is a specialized virtual care platform dedicated to modernizing women's healthcare. The nation's fastest-growing women's telehealth company, Midi combines medical expertise, purpose-built AI, and compassionate care to deliver personal",
+      "email": {
+        "subject": "Cycle-timed labs + perimenopause patients for Midi",
+        "body": "Hi there,\n\nMidi has built insurance-covered virtual care purpose-built for perimenopause and menopause, and a big part of that care depends on knowing where a woman is hormonally before her first visit.\n\nGini Health is a needle-free, at-home blood test timed to the menstrual cycle. Two draws cover about 24 markers, including reproductive hormones, thyroid, HbA1c, ApoB and ferritin, with doctor-reviewed results. Your clinicians would get hormone data in proper cycle context. Many of the women on our 5,000+ waitlist are in perimenopause and need a clinic that can diagnose and treat.\n\nOne idea is a two-way referral pilot. We send Gini users who need HRT evaluation to Midi, and Midi patients can use Gini for cycle-timed labs at home.\n\nOpen to a 20-minute call to explore it?\n\n[Your name]\nGini Health"
+      }
+    },
+    {
+      "id": "alloy-health-1",
+      "name": "Alloy Health",
+      "category": "Menopause & perimenopause telehealth clinics",
+      "fit_score": 9,
+      "why": "DTC women's health leader can add needle-free baseline labs to its menopause care and receive symptomatic perimenopausal leads from Gini.",
+      "contact_role": "Head of Partnerships",
+      "website": "https://myalloy.com",
+      "source_url": "https://www.myalloy.com/",
+      "source_title": "Alloy Health",
+      "evidence": "# Alloy Health Alloy Health is a Hospitals and Health Care company. Alloy Health employs 69 people (+23.2% YoY, +13 people), founded in 2021. Headquartered in New York, New York, United States. Its workforce is distributed across United States, Brazil, United Kingdom, and Tunisia. ## About Alloy Health is the leading direct-to-consumer women’s digital health company providing women with expert care, trusted information, and personalized solutions to feel their best in perimenopause and menopause. Personalized & Clinically Proven Alloy is the only platform connecting women with physicians trained specifically in menopause care who guide them through the first symptoms to long-term maintenance. Customized plans are developed exclusively by board-certified physicians trained in menopau"
+    },
+    {
+      "id": "progyny-2",
+      "name": "Progyny",
+      "category": "Women's health & fertility benefits platforms",
+      "fit_score": 9,
+      "why": "Expanding beyond family building into women's health benefits; Gini adds a measurable at-home hormonal health service for employers and plans.",
+      "contact_role": "Head of Partnerships",
+      "website": "https://progyny.com",
+      "source_url": "https://progyny.com/",
+      "source_title": "Progyny, Inc.",
+      "evidence": "# Progyny, Inc. Progyny, Inc. (PGNY) is a Hospitals and Health Care company. Progyny partners with employers, health plans, consultants, labor unions, public entities, peos and general agents, and individuals to deliver personalized family building and women's health benefits. Progyny, Inc. employs 942 people (+10.3% YoY, +88 people) and has an annual revenue of $1.3B. Headquartered in New York, New York, United States. Its workforce is distributed across 7 countries (including United States, Germany, United Kingdom, Canada, and Australia). ## About Progyny (Nasdaq: PGNY) is a transformative fertility, family building and women’s health benefits solution, trusted by the nation’s leading employers, health plans and benefit purchasers. We envision a world where everyone can realize their "
+    },
+    {
+      "id": "evernow-3",
+      "name": "Evernow",
+      "category": "Menopause & perimenopause telehealth clinics",
+      "fit_score": 8,
+      "why": "Online menopause prescriber needs convenient labs and a lead source to rebuild growth after a shrinking team.",
+      "contact_role": "Head of Partnerships",
+      "website": "https://evernow.com",
+      "source_url": "https://www.evernow.com/",
+      "source_title": "Evernow",
+      "evidence": "# Evernow Evernow is a Wellness and Fitness Services company. Evernow is a company that provides expert menopause care, treatments, and prescriptions online. Evernow employs 24 people (-40.0% YoY, -16 people) and has an annual revenue of $2M. Headquartered in San Francisco, California, United States. Its workforce is distributed across United States and Nicaragua. ## About Evernow is reinventing healthcare delivery to improve women’s lives. More than 55 million women in the U.S. are experiencing menopause symptoms, but 75% of those who seek care don’t get it. We’re building Evernow to close this gap while elevating care. Our doctors provide expert, convenient treatments based on the latest research. Our product team builds the platform that allows us to deliver a new kind of experience"
+    },
+    {
+      "id": "winona-4",
+      "name": "Winona",
+      "category": "Menopause & perimenopause telehealth clinics",
+      "fit_score": 8,
+      "why": "Post-reproductive care provider can use Gini's two-draw hormone context to support HRT decisions and acquire perimenopause patients.",
+      "contact_role": "Head of Partnerships",
+      "website": "https://bywinona.com",
+      "source_url": "https://bywinona.com/",
+      "source_title": "Winona",
+      "evidence": "# Winona Winona is a Wellness and Fitness Services company. Winona is a dedicated team of professionals dedicated to enhancing women's access to post-reproductive healthcare through unwavering determination and expertise. They offer career opportunities in women's health and have a spirit of passion and profession. Winona employs 107 people (+25.9% YoY, +22 people), founded in 2020. Headquartered in Austin, Texas, United States. Its workforce is distributed across 17 countries (including United States, Philippines, Canada, Argentina, and Mexico). ## About Doctor prescribed treatments for menopause symptoms. Bio-identical hormone replacement therapy, backed by science and shipped directly to your door. Find our open positions here: https://bywinona.com/careers ## Company Details - Indus"
+    },
+    {
+      "id": "anzara-health-5",
+      "name": "Anzara Health",
+      "category": "PCOS & hormonal health virtual care providers",
+      "fit_score": 8,
+      "why": "Endocrinologist-founded hormonal and metabolic clinic across many US states can treat Gini's PCOS-suspected users using cycle-timed labs.",
+      "contact_role": "VP of Business Development",
+      "website": "https://anzarahealth.com",
+      "source_url": "https://anzarahealth.com/",
+      "source_title": "Anzara Health",
+      "evidence": "# Anzara Health Anzara Health is a Hospitals and Health Care company. Anzara Health is a company that provides hormonal and metabolic health services for women. They offer evidence-based online care and have created endocrinologists Ana Kausel and Sara Muleh. Anzara Health employs 8 people (+60.0% YoY, +3 people), founded in 2022. Headquartered in Miami, Florida, United States, with offices including Hartford, Honolulu, New York, Raleigh, and Sacramento. Its workforce is distributed across United States and Colombia. ## About Anzara Health is a telemedicine-only, concierge endocrinology practice. Founded by two endocrinologists, Dr. Ana Maria Kausel and Dr. Sarah Musleh, who's journeys inspired them to create a multi-state platform to provide best-in-class care without the limitations "
+    },
+    {
+      "id": "diana-health-6",
+      "name": "Diana Health",
+      "category": "Fertility clinics & OB-GYN practice networks",
+      "fit_score": 8,
+      "why": "Hybrid gynecology and menopause provider can offer at-home pre-visit panels and accept Gini referrals into insurance-covered care.",
+      "contact_role": "Business Development Director",
+      "website": "https://heydianahealth.com",
+      "source_url": "https://heydianahealth.com/",
+      "source_title": "Diana Health",
+      "evidence": "# Diana Health Diana Health is a Hospitals and Health Care company. Diana Health offers personalized women's healthcare, including maternity, gynecology, menopause, mental health, and wellness services. In-person and virtual care, tailored to your needs, with most major insurance plans accepted, including Medicaid. Take control of your health journey today. Diana Health employs 223 people (+41.1% YoY, +65 people) and has an annual revenue of $5M, founded in 2022. Headquartered in Chattanooga, Tennessee, United States, with offices including Fort Walton Beach, Orange City, Allen, New York, and Crossville. Its workforce is distributed across United States and Colombia. ## About Diana Health is a network of modern women's health practices working in partnership with hospitals to reimagine "
+    },
+    {
+      "id": "clue-7",
+      "name": "Clue",
+      "category": "Cycle-tracking apps & women's wearables",
+      "fit_score": 8,
+      "why": "Science-based cycle tracker can monetize US users with cycle-timed lab testing while sharing timing data with Gini.",
+      "contact_role": "VP of Partnerships",
+      "website": "https://helloclue.com",
+      "source_url": "https://helloclue.com/",
+      "source_title": "Clue",
+      "evidence": "# Clue Clue is a Wellness and Fitness Services company. Clue is a women-led period and cycle tracker that provides science-based insights, predictions, and personalized tracking. Clue employs 164 people (+12.3% YoY, +18 people) and has an annual revenue of $18M, founded in 2012. Headquartered in Berlin, Germany, with presence in United States. Its workforce is distributed across 17 countries (including Germany, United States, France, United Kingdom, and Brazil). ## About Clue is the #1 women-led period and cycle tracker, loved by over 100 million women and people with cycles around the world. Available in 23 languages and over 190 countries, Clue helps its members turn their cycle into a powerful tool to discover patterns, stay on top of changes, and make informed health decisions. Wi"
+    },
+    {
+      "id": "flo-health-8",
+      "name": "Flo Health",
+      "category": "Cycle-tracking apps & women's wearables",
+      "fit_score": 8,
+      "why": "Large cycle app can offer an actionable lab upsell to symptomatic users, giving Gini cycle timing and massive reach.",
+      "contact_role": "VP of Partnerships",
+      "website": "https://flo.health",
+      "source_url": "https://flo.health/",
+      "source_title": "Flo Health Inc.",
+      "evidence": "# Flo Health Inc. Flo Health Inc. is a Technology, Information and Internet company. Flo Careers is a company that offers job opportunities and provides information about their careers. Flo Health Inc. employs 706 people (+3.2% YoY, +22 people) and has an annual revenue of GBP5.5M, founded in 2015. Headquartered in London, United Kingdom, with presence in Lithuania. Its workforce is distributed across 27 countries (including United Kingdom, Lithuania, Poland, United States, and Netherlands). ## About At Flo Health, our purpose is to build a better future for female health. We are the world’s leading period and ovulation tracker, empowering over 400 million women globally to take control of their health. With 77 million monthly active users, including 25% of US women, Flo has become a tr"
+    },
+    {
+      "id": "body-good-9",
+      "name": "Body Good",
+      "category": "GLP-1 weight-management telehealth programs",
+      "fit_score": 7,
+      "why": "Physician-led care for women 35+ with wellness injections fits Gini's GLP-1 and perimenopause segments for baseline and monitoring labs.",
+      "contact_role": "Director of Clinical Partnerships",
+      "website": "https://joinbodygood.com",
+      "source_url": "https://joinbodygood.com/",
+      "source_title": "Body Good",
+      "evidence": "# Body Good Body Good is a Hospitals and Health Care company. Body Good is a healthcare company that provides physician-led care for women 35+. They offer personalized and branded health insurance, wellness injections, and quick refill services. Body Good employs 4 people, founded in 2023. Headquartered in Miami, Florida, United States. Its workforce is distributed across United Arab Emirates and United States. ## About Body Good is a physician-led virtual obesity medicine and metabolic health practice created for women who deserve to be heard, informed, and believed. We provide evidence-based weight-management care that begins with the whole clinical picture—medical history, labs when appropriate, goals, preferences, risks, cost, and real life. Every patient is evaluated by a licensed"
+    },
+    {
+      "id": "elara-10",
+      "name": "elara",
+      "category": "GLP-1 weight-management telehealth programs",
+      "fit_score": 7,
+      "why": "Women-led GLP-1 telehealth in all 50 states gains hormone-aware labs that differentiate its weight care and improve retention.",
+      "contact_role": "Director of Clinical Partnerships",
+      "website": "https://withelara.com",
+      "source_url": "https://withelara.com/",
+      "source_title": "elara",
+      "evidence": "# elara elara is a Health and Human Services company. Elara is a women-led online telehealth platform for GLP-1 weight care, sexual wellness, hair, and skin, serving women in all 50 US states. Elara employs 15 people (+650.0% YoY, +13 people), founded in 2025. Headquartered in New York City, New York, United States. Its workforce is distributed across Egypt and United States. ## About Elara exists to close the gap between women and the care they deserve. For too long, women’s health has been dismissed, underfunded, or reduced to surface-level solutions. We’re changing that by modernizing access to clinical care, weight-loss medications, and lifestyle support through a model that is transparent, evidence-based, and truly designed around women’s lives. We offer a comprehensive suite of c"
+    },
+    {
+      "id": "mymenopauserx-11",
+      "name": "MyMenopauseRx",
+      "category": "Menopause & perimenopause telehealth clinics",
+      "fit_score": 7,
+      "why": "Insurance-covered virtual menopause office can receive Gini-qualified patients and use at-home labs before visits.",
+      "contact_role": "Head of Partnerships",
+      "website": "https://mymenopauserx.com",
+      "source_url": "https://mymenopauserx.com/",
+      "source_title": "MyMenopauseRx",
+      "evidence": "# MyMenopauseRx MyMenopauseRx is a Wellness and Fitness Services company. MyMenopauseRx is an online doctor's office devoted to menopause healthcare, covered by health insurance. They provide expert menopause care tailored to individuals, with compassionate guidance, board-certified guidance, fda-approved therapies, and insurance-covered virtual visits. MyMenopauseRx employs 11 people (-8.3% YoY, -1 person), founded in 2021. Headquartered in Wheaton, Illinois, United States. Its workforce is distributed across United States and United Kingdom. ## About Here at MyMenopauseRx we are on a mission to build healthcare bridges for menopause care and midlife wellness. Menopause care is women's healthcare! Our founder is a gynecologist, menopause specialist and midlife woman herself. Mimicking "
+    },
+    {
+      "id": "pcos-sisters-telehealth-clinic-wellness-center-12",
+      "name": "PCOS Sisters Telehealth Clinic & Wellness Center",
+      "category": "PCOS & hormonal health virtual care providers",
+      "fit_score": 7,
+      "why": "Multi-state PCOS diagnosis and treatment clinic benefits from cycle-timed androgen and metabolic labs and Gini patient referrals.",
+      "contact_role": "VP of Business Development",
+      "website": "https://pcossisters.com",
+      "source_url": "https://pcossisters.com/",
+      "source_title": "PCOS Sisters Telehealth Clinic & Wellness Center",
+      "evidence": "# PCOS Sisters Telehealth Clinic & Wellness Center PCOS Sisters Telehealth Clinic & Wellness Center is a Medical Practices company. PCOS specialists provide primary care, diagnosis, and personalized PCOS treatment for women with PCOS. PCOS Sisters Telehealth Clinic & Wellness Center employs 5 people (+25.0% YoY, +1 person), founded in 2022. Headquartered in Jacksonville, Florida, United States, with offices including Atlanta, phoenix, Arlington, Orlando, and Houston. ## About PCOS (PMOS) Sisters telehealth & wellness center promises to provide comprehensive, personalized, accessible, transparent care to women struggling with Polyendocrine Metabolic Ovarian Syndrome (PMOS) formerly known as PCOS. We will achieve this through metabolic optimization, medical management of symptoms, and emp"
+    },
+    {
+      "id": "ovia-health-by-labcorp-13",
+      "name": "Ovia Health by Labcorp",
+      "category": "Women's health & fertility benefits platforms",
+      "fit_score": 7,
+      "why": "Employer family health platform can extend into hormonal health with at-home testing, reaching women beyond pregnancy and parenting.",
+      "contact_role": "Head of Partnerships",
+      "website": "https://oviahealth.com",
+      "source_url": "https://oviahealth.com/",
+      "source_title": "Ovia Health by Labcorp",
+      "evidence": "# Ovia Health by Labcorp Ovia Health by Labcorp is a Hospitals and Health Care company. Ovia Health is a family health benefits platform that helps women and families with personalized and data-driven solutions for fertility, pregnancy, and parenting. Ovia Health by Labcorp employs 80 people (-8.0% YoY, -7 people) and has an annual revenue of $20M, founded in 2012. Headquartered in Westborough, Massachusetts, United States, with an office in Boston. Its workforce is distributed across United States and Canada. ## About Ovia Health by Labcorp offers a leading digital platform dedicated to supporting the full spectrum of women’s health, from preconception through menopause. Our clinical programs provide women with personalized guidance, data-driven insights, and access to over 50 clinical"
+    },
+    {
+      "id": "kindbody-14",
+      "name": "Kindbody",
+      "category": "Fertility clinics & OB-GYN practice networks",
+      "fit_score": 7,
+      "why": "Fertility and women's wellness clinic can use needle-free pre-visit hormone panels in assessments and gain Gini fertility-curious leads.",
+      "contact_role": "Business Development Director",
+      "website": "https://kindbody.com",
+      "source_url": "https://kindbody.com/",
+      "source_title": "Kindbody",
+      "evidence": "# Kindbody Kindbody is a Hospitals and Health Care company. Kindbody is a fertility clinic that offers fertility assessments, fertility testing, egg freezing, IVF, virtual fertility telemedicine, and women's wellness. Kindbody employs 582 people (-7.0% YoY, -44 people) and has an annual revenue of $14.1M, founded in 2018. Headquartered in New York, New York, United States. Its workforce is distributed across 8 countries (including United States, Serbia, Canada, Croatia, and Egypt). ## About Kindbody is a leading fertility, family-building, and women’s health company offering comprehensive clinical care and benefit solutions for employers, health plans, and individuals. Through its clinically curated network, and virtual care, Kindbody provides end‑to‑end support spanning fertility treat"
+    },
+    {
+      "id": "pendant-15",
+      "name": "Pendant",
+      "category": "Women's health & fertility benefits platforms",
+      "fit_score": 6,
+      "why": "Fertility benefits solution can add hormonal health testing to member navigation, broadening its women's health offering for employers.",
+      "contact_role": "Head of Partnerships",
+      "website": "https://pendanthealth.com",
+      "source_url": "https://pendanthealth.com/",
+      "source_title": "Pendant",
+      "evidence": "# Pendant Pendant is a Hospitals and Health Care company. Pendant Health delivers an integrated fertility benefits solution that unites plan design, member navigation, and clinic-aligned care. Their mission is to deliver what’s next in family building benefits and women’s health through the power of technology. Pendant employs 18 people. ## About Pendant is a women’s health and family building benefits solution powered by a global network of leading providers. Our tech-enabled model brings clarity, coordination, and predictability to a complex experience by aligning incentives directly with clinics to integrate care delivery, quality standards, and outcomes measurement. Family building is complex. Navigating it shouldn’t be. This is what's next in family building. This is Pendant. ## C"
+    },
+    {
+      "id": "ccrm-fertility-16",
+      "name": "CCRM Fertility",
+      "category": "Fertility clinics & OB-GYN practice networks",
+      "fit_score": 6,
+      "why": "National fertility network can streamline workups with at-home cycle-timed panels and capture Gini users seeking fertility care.",
+      "contact_role": "Business Development Director",
+      "website": "https://ccrmivf.com",
+      "source_url": "https://ccrmivf.com/",
+      "source_title": "CCRM Fertility",
+      "evidence": "# CCRM Fertility CCRM Fertility is a Medical Practices company. CCRM Fertility is a leading fertility clinic network with numerous locations throughout the United States and Canada. Start your journey by inquiring about services and treatment options near you. CCRM Fertility employs 792 people (+8.6% YoY, +63 people) and has an annual revenue of $85M, founded in 1987. Headquartered in Lone Tree, Colorado, United States, with offices in Denver and Louisville. Its workforce is distributed across United States and Canada. ## About CCRM Fertility is a global pioneer in fertility treatment, research and science. Founded by Dr. William Schoolcraft more than 35 years ago, CCRM Fertility specializes in the most advanced fertility treatments, with deep expertise in IVF, fertility testing, egg fr"
+    },
+    {
+      "id": "hera-women-s-health-17",
+      "name": "Hera Women's Health",
+      "category": "Fertility clinics & OB-GYN practice networks",
+      "fit_score": 6,
+      "why": "Network of seven OB/GYN practices in Nevada and Arizona can roll out at-home pre-visit labs across sites centrally.",
+      "contact_role": "Business Development Director",
+      "website": "https://hera-health.com",
+      "source_url": "https://hera-health.com/",
+      "source_title": "Hera Women's Health",
+      "evidence": "# Hera Women's Health Hera Women's Health is a Hospitals and Health Care company. Hera Women's Health is a clinical and operational network behind seven independently branded OB/GYN and MFM practices across Nevada and Arizona. They provide local care, national standard, and have a national standard. Hera Women's Health employs 64 people (+137.0% YoY, +37 people). Headquartered in Las Vegas, Nevada, United States, with offices in Alexandria, Phoenix, and Reno. Its workforce is distributed across United States and Canada. ## About HERA is a national collaborative of top women's healthcare providers - Committed to practicing locally while performing nationally to set the standard for data-driven, outcome-oriented care that elevates the value of women’s health practices across the nation. "
+    },
+    {
+      "id": "midwest-center-for-women-s-healthcare-18",
+      "name": "Midwest Center for Women's HealthCare",
+      "category": "Fertility clinics & OB-GYN practice networks",
+      "fit_score": 6,
+      "why": "OB/GYN group offering menopause care can use Gini panels for perimenopause workups and gain referred patients.",
+      "contact_role": "Practice Growth Director",
+      "website": null,
+      "source_url": "https://mcwhc.com/",
+      "source_title": "Midwest Center for Women's HealthCare",
+      "evidence": "# Midwest Center for Women's HealthCare Midwest Center for Women's HealthCare is a Medical Practices company. Midwest Center for Women's HealthCare OB/GYN is a healthcare center that offers comprehensive obstetrics, gynecology, menopause care, and gynecology surgery. Midwest Center for Women's HealthCare employs 140 people (+6.9% YoY, +9 people) and has an annual revenue of $22.6M, founded in 2007. Headquartered in Deerfield, Illinois, United States, with offices including Evanston, Buffalo Grove, Elgin, Hoffman Estates, and South Elgin. Its workforce is distributed across United States and Australia. ## About Midwest Center for Women’s HealthCare (MCWHC) is the largest group of board-certified Obstetrics and Gynecology physicians and surgeons in Illinois with more than 50 physicians tr"
+    },
+    {
+      "id": "women-s-healthcare-associates-19",
+      "name": "Women's Healthcare Associates",
+      "category": "Fertility clinics & OB-GYN practice networks",
+      "fit_score": 6,
+      "why": "Large Portland-area OB/GYN and midwife group can offer at-home hormone panels to reduce in-clinic draws.",
+      "contact_role": "Practice Growth Director",
+      "website": null,
+      "source_url": "https://whallc.com/",
+      "source_title": "Women's Healthcare Associates, LLC",
+      "evidence": "# Women's Healthcare Associates, LLC Women's Healthcare Associates, LLC is a Medical Practices company. Women's Healthcare Associates is a healthcare organization that provides OB/GYN physicians and nurse-midwives for women's health clinics in Portland, Oregon, Hillsboro, Newberg, Tualatin, and Oregon City. Women's Healthcare Associates, LLC employs 433 people (+0.2% YoY, +1 person) and has an annual revenue of $10M, founded in 1999. Headquartered in Portland, Oregon, United States, with an office in Tigard. ## About At WHA, we're a team, passionate about humanizing healthcare. We're inspired by the diverse stories, strength and resilience of our patients and the unique choices they make in pursuing health for themselves and their families. We envision a world where every person has the"
+    },
+    {
+      "id": "mira-20",
+      "name": "Mira",
+      "category": "Cycle-tracking apps & women's wearables",
+      "fit_score": 6,
+      "why": "Urine hormone tracker's users want deeper answers; Gini blood panels extend Mira's hormone insights and cycle data enables timing.",
+      "contact_role": "VP of Partnerships",
+      "website": "https://miracare.com",
+      "source_url": "https://miracare.com/",
+      "source_title": "Mira",
+      "evidence": "# Mira Mira is a Medical Equipment Manufacturing company. Mira Fertility Tracker is a fertility tracking and monitoring company that helps women get pregnant faster through actual hormone analysis and personalized ovulation tracking. Mira employs 221 people (+37.3% YoY, +60 people) and has an annual revenue of $6M. Headquartered in Pleasanton, California, United States. Its workforce is distributed across 29 countries (including United States, Poland, Spain, Georgia, and Netherlands). ## About Mira transforms hormone health through AI-powered technology, helping individuals track and understand their hormones through every stage of life. From fertility to menopause, our FDA/CE-compliant Mira Monitor and app provide personalized insight to support more informed health decisions. Why? Be"
+    },
+    {
+      "id": "glow-21",
+      "name": "Glow",
+      "category": "Cycle-tracking apps & women's wearables",
+      "fit_score": 6,
+      "why": "US-based family of period and ovulation apps can monetize engaged users with cycle-timed lab kits.",
+      "contact_role": "VP of Partnerships",
+      "website": "https://glowing.com",
+      "source_url": "https://glowing.com/",
+      "source_title": "Glow",
+      "evidence": "# Glow Glow is a Software Development company. Glow is a women's health guide that provides a family of four apps for tracking periods, ovulation, pregnancy, baby, and period. They offer a platform for parents to track their health and follow prenatal health. Glow employs 20 people and has an annual revenue of $8.1M. Headquartered in San Francisco, California, United States. Its workforce is distributed across China, United States, Canada, and United Kingdom. ## About Glow develops a suite of mobile apps that support women’s reproductive health across every stage of life. Our four flagship products—Eve (for tracking periods), Glow (for tracking fertility and ovulation), Glow Nurture (for pregnancy), and Glow Baby (for early childhood)—are available on both iOS and Android. Millions of"
+    },
+    {
+      "id": "tempdrop-22",
+      "name": "Tempdrop",
+      "category": "Cycle-tracking apps & women's wearables",
+      "fit_score": 6,
+      "why": "Ovulation-tracking thermometer data can precisely time Gini's draws, while Tempdrop adds a lab-testing upsell.",
+      "contact_role": "VP of Partnerships",
+      "website": "https://tempdrop.com",
+      "source_url": "https://www.tempdrop.com/",
+      "source_title": "Tempdrop",
+      "evidence": "# Tempdrop Tempdrop is a Wellness and Fitness Services company. Tempdrop is a smart thermometer and charting app that provides accurate temperature data to accurately track ovulation at home. Tempdrop employs 19 people (-5.0% YoY, -1 person) and has an annual revenue of $6M, founded in 2014. Headquartered in Tel Aviv, Israel, with presence in United States. Its workforce is distributed across 5 countries (including Israel, United States, United Kingdom, Australia, and Portugal). ## About Tempdrop’s wearable sensor and accompanying charting app brings the full fertility charting solution to your smartphone. Tempdrop is a fertility tracking wearable with unprecedented accuracy, which tracks your fertility signs and symptoms in it's app. The sensor is a personalized, user-specific thermo"
+    },
+    {
+      "id": "hello-dose-23",
+      "name": "Hello Dose",
+      "category": "GLP-1 weight-management telehealth programs",
+      "fit_score": 5,
+      "why": "Bloodwork-guided GLP-1 and hormone care provider could outsource convenient needle-free labs for women patients.",
+      "contact_role": "Director of Clinical Partnerships",
+      "website": "https://hellodose.com",
+      "source_url": "https://hellodose.com/",
+      "source_title": "Hello Dose",
+      "evidence": "# Hello Dose Hello Dose is a Hospitals and Health Care company. Hello Dose provides personalized weight management, hormone, and wellness care guided by bloodwork and licensed nurse practitioners through virtual visits. Hello Dose employs 2 people, founded in 2022. Its workforce is distributed across South Africa and United States. ## About Over 80% of people regain weight after stopping GLP-1 medications like Ozempic. We help you be the 20% who don't. Our licensed clinicians specialize in GLP-1 medications, helping you achieve sustainable results through customized dosing, nutrition guidance, and real human support. Hello Dose. Personalized care. Real results. ## Company Details - Industry: Hospitals and Health Care - Type: Privately held - Founded Year: 2022 - Homepage: hellodose."
+    },
+    {
+      "id": "second-peak-24",
+      "name": "Second Peak",
+      "category": "Menopause & perimenopause telehealth clinics",
+      "fit_score": 5,
+      "why": "New physician-led HRT telemedicine practice needs patient acquisition and at-home hormone labs to scale.",
+      "contact_role": "Founder",
+      "website": "https://secondpeakmd.com",
+      "source_url": "https://secondpeakmd.com/",
+      "source_title": "Second Peak",
+      "evidence": "# Second Peak Second Peak is a Medical Practices company. Second Peak employs 3 people, founded in 2025. Headquartered in Beaverton, Oregon, United States, with offices in Baltimore and Portland. ## About Second Peak is a physician-led telemedicine practice specializing in hormone replacement therapy (HRT) and personalized hormone care for women navigating perimenopause and menopause and men's hormone health. Led by board-certified physician Dr. Nicole Klimt, Second Peak combines evidence-based medicine with a concierge approach to care — offering comprehensive lab testing, individualized treatment plans, and ongoing physician support designed around each patient’s unique physiology, symptoms, and goals. We believe hormone care should feel personal, transparent, and collaborative. Ou"
+    },
+    {
+      "id": "prima-temp-25",
+      "name": "Prima-Temp",
+      "category": "Cycle-tracking apps & women's wearables",
+      "fit_score": 5,
+      "why": "Continuous temperature tracking company can integrate cycle data with Gini and add actionable blood testing for users.",
+      "contact_role": "VP of Partnerships",
+      "website": "https://prima-temp.com",
+      "source_url": "https://prima-temp.com/",
+      "source_title": "Prima-Temp",
+      "evidence": "# Prima-Temp Prima-Temp is a Medical Equipment Manufacturing company. Prima-Temp is a technology company that empowers women to make informed health decisions through science-based, digital health technology, access to continuous data tracking, and community. Prima-Temp employs 11 people and has an annual revenue of $5M, founded in 2010. Headquartered in Boulder, Colorado, United States. Its workforce is distributed across United States and Uruguay. ## About Prima-Temp, Inc., based in Boulder, Colorado, empowers women to make informed health decisions through science-based, digital health technology, access to continuous data tracking, and community. Prima-Temp applies health-trained artificial intelligence (AI) to continuous core body temperature (CCBT) to identify predictive patterns "
+    },
+    {
+      "id": "garden-ob-gyn-26",
+      "name": "Garden Ob/Gyn",
+      "category": "Fertility clinics & OB-GYN practice networks",
+      "fit_score": 5,
+      "why": "Ten-location NYC and Long Island OB/GYN group could use at-home panels to streamline gynecology visits.",
+      "contact_role": "Practice Growth Director",
+      "website": "https://gardenobgyn.com",
+      "source_url": "https://gardenobgyn.com/",
+      "source_title": "Garden Ob/Gyn",
+      "evidence": "# Garden Ob/Gyn Garden Ob/Gyn is a Hospitals and Health Care company. Garden OB/GYN is a women's healthcare provider offering comprehensive OB/GYN care across 10 convenient locations in NYC and Long Island. Garden Ob/Gyn employs 140 people (-13.6% YoY, -22 people) and has an annual revenue of $9.7M. Headquartered in New York, New York, United States, with offices including Cedarhurst, Garden City, New Hyde Park, Massapequa, and Commack. Its workforce is distributed across United States and Philippines. ## About Garden Ob/Gyn is a state of the art practice offering comprehensive service in Obstetrics, Gynecology and Maternal Fetal medicine. We are committed to caring for you with empathy, compassion and an emphasis on education. Compassionate and quality medicine defines the mission we p"
+    },
+    {
+      "id": "clair-health-27",
+      "name": "Clair Health",
+      "category": "Cycle-tracking apps & women's wearables",
+      "fit_score": 5,
+      "why": "Continuous hormone monitor can pair its cycle insights with Gini's lab-validated blood panels for life-stage support.",
+      "contact_role": "VP of Partnerships",
+      "website": "https://wearclair.com",
+      "source_url": "https://wearclair.com/",
+      "source_title": "Clair Health",
+      "evidence": "# Clair Health Clair Health is a Wellness and Fitness Services company. Clair is a company that specializes in continuous hormone monitors. They provide a range of services including hormone clarity, cycle insights, custom training, smart nutrition, longevity care, and life stage support. Clair Health employs 22 people. Headquartered in San Francisco, California, United States. Its workforce is distributed across United States, Canada, India, and Pakistan. ## About At Clair, our mission is to give every woman the intelligence her body holds, so she can assess her own health goals, advocate with evidence, and finally be understood. ## Company Details - Industry: Wellness and Fitness Services - Type: Privately held - Headquarters: San Francisco, United States - Homepage: wearclair.com - "
+    }
+  ],
+  "view": "partners"
+}
