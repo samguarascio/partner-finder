@@ -1,17 +1,35 @@
 "use client";
 
-import { ArrowRight, Copy, Download, Globe, Link2, Loader2, Plus, RefreshCw, RotateCcw, Search, Sparkles, X } from "lucide-react";
-import { Fragment, useEffect, useState } from "react";
+import {
+  ArrowRight,
+  Copy,
+  Download,
+  Globe,
+  Keyboard,
+  Link2,
+  Loader2,
+  Plus,
+  RefreshCw,
+  RotateCcw,
+  Search,
+  Sparkles,
+  ThumbsDown,
+  Undo2,
+  UserSearch,
+  X,
+} from "lucide-react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { flushSync } from "react-dom";
 import { toast } from "sonner";
 import { DraftStatus, Label, LabelDot, ScoreBars } from "@/components/app/icons";
 import { Shortcut } from "@/components/app/shortcut";
+import { ShortcutsSheet } from "@/components/app/shortcuts-sheet";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useHotkeys } from "@/hooks/use-hotkeys";
-import { api, downloadCsv } from "@/lib/client";
-import type { Category, Email, Partner, Profile } from "@/lib/types";
+import { api, downloadCsv, linkedinSearchUrl } from "@/lib/client";
+import type { Category, Email, Exclusions, Partner, Profile } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
 const STORAGE_KEY = "partner-finder-v1";
@@ -22,7 +40,7 @@ const LABEL_COLORS = ["#5e6ad2", "#26b5ce", "#4cb782", "#f2c94c", "#f2994a", "#e
 const field =
   "rounded-md border-border bg-[#141517] text-[13px] md:text-[13px] text-foreground placeholder:text-tertiary-foreground focus-visible:border-[#41444c] focus-visible:ring-0 dark:bg-[#141517]";
 
-type Step = "profile" | "categories" | "partners" | "email";
+type Step = "profile" | "categories" | "partners" | "more" | "email";
 
 interface SavedState {
   url: string;
@@ -104,13 +122,17 @@ export default function Home() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [partners, setPartners] = useState<Partner[]>([]);
   const [openId, setOpenId] = useState<string | null>(null);
-  const [busy, setBusy] = useState<null | "profile" | "categories" | "partners">(null);
+  const [busy, setBusy] = useState<null | "profile" | "categories" | "partners" | "more">(null);
   const [busySince, setBusySince] = useState(0);
   const [drafting, setDrafting] = useState<string | null>(null);
   const [error, setError] = useState<{ step: Step; message: string } | null>(null);
   const [searchNote, setSearchNote] = useState("");
   const [filter, setFilter] = useState<string | null>(null);
+  // The row the keyboard acts on (J/K to move).
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [shortcutsOpen, setShortcutsOpen] = useState(false);
   const [loaded, setLoaded] = useState(false);
+  const urlInput = useRef<HTMLInputElement>(null);
 
   // Restore the last session from this browser.
   useEffect(() => {
@@ -140,18 +162,29 @@ export default function Home() {
     return LABEL_COLORS[(i < 0 ? categories.length : i) % LABEL_COLORS.length];
   };
 
-  // Shows one category's partners. Rows slide into place with a view transition.
-  function applyFilter(next: string | null) {
-    const update = () => {
-      setFilter(next);
-      if (next) setOpenId((id) => (partners.find((p) => p.id === id)?.category === next ? id : null));
+  function exclusions(list: Partner[]): Exclusions {
+    return {
+      domains: list.flatMap((p) => (p.website ? [p.website] : [])),
+      names: list.map((p) => p.name),
     };
+  }
+
+  // Applies a change to the partner list so rows slide into place.
+  function withTransition(update: () => void) {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (!document.startViewTransition || reduceMotion) {
       update();
       return;
     }
     document.startViewTransition(() => flushSync(update));
+  }
+
+  // Shows one category's partners.
+  function applyFilter(next: string | null) {
+    withTransition(() => {
+      setFilter(next);
+      if (next) setOpenId((id) => (partners.find((p) => p.id === id)?.category === next ? id : null));
+    });
   }
 
   async function run(step: NonNullable<typeof busy>, fn: () => Promise<void>) {
@@ -195,9 +228,10 @@ export default function Home() {
     run("partners", async () => {
       const res = await api<{ partners: Partner[]; candidateCount: number; dropped: number }>(
         "/api/partners",
-        { profile, categories: cats },
+        { profile, categories: cats, exclude: exclusions(rejected) },
       );
-      setPartners(res.partners);
+      // Rejected companies stay on record so later searches keep skipping them.
+      setPartners([...res.partners, ...rejected]);
       setOpenId(null);
       setFilter(null);
       setSearchNote(
@@ -205,6 +239,47 @@ export default function Home() {
           (res.dropped ? ` · ${res.dropped} picks dropped because they weren't in the cited result` : ""),
       );
     });
+  }
+
+  // Digs deeper in the filtered category (or all of them), skipping known companies.
+  function findMore() {
+    if (!profile || busy) return;
+    const cats = categories.filter(
+      (c) => (!filter || c.name === filter) && c.name.trim() && c.queries.some((q) => q.trim()),
+    );
+    if (!cats.length) {
+      setError({ step: "more", message: `"${filter}" isn't in the categories above any more. Add it back to search it.` });
+      return;
+    }
+    run("more", async () => {
+      const res = await api<{ partners: Partner[]; dropped: number }>("/api/partners", {
+        profile,
+        categories: cats,
+        exclude: exclusions(partners),
+        more: true,
+      });
+      if (!res.partners.length) {
+        toast("No new partners found. Try editing the search queries in step 2.");
+        return;
+      }
+      withTransition(() =>
+        setPartners((ps) => [...ps, ...res.partners].sort((a, b) => b.fit_score - a.fit_score)),
+      );
+      toast.success(`Found ${res.partners.length} more partner${res.partners.length === 1 ? "" : "s"}`);
+    });
+  }
+
+  function setRejected(p: Partner, value: boolean) {
+    withTransition(() => {
+      setPartners((ps) => ps.map((x) => (x.id === p.id ? { ...x, rejected: value } : x)));
+      if (value && openId === p.id) setOpenId(null);
+    });
+    if (value) {
+      toast(`Marked ${p.name} as not a fit`, {
+        description: "Hidden, left out of exports, and skipped in future searches.",
+        action: { label: "Undo", onClick: () => setRejected(p, false) },
+      });
+    }
   }
 
   async function generateEmail(partner: Partner) {
@@ -223,6 +298,7 @@ export default function Home() {
 
   function toggleRow(p: Partner) {
     const next = openId === p.id ? null : p.id;
+    setSelectedId(p.id);
     setOpenId(next);
     if (next && !p.email && drafting !== p.id) generateEmail(p);
   }
@@ -267,21 +343,107 @@ export default function Home() {
   }
 
   const openPartner = partners.find((p) => p.id === openId);
-  const visible = filter ? partners.filter((p) => p.category === filter) : partners;
+  const active = partners.filter((p) => !p.rejected);
+  const rejected = partners.filter((p) => p.rejected);
+  const visible = filter ? active.filter((p) => p.category === filter) : active;
 
+  // Category order for the 1–9 keys: as listed in step 2, then any others.
+  const filterOrder = [
+    ...categories.map((c) => c.name).filter((n) => active.some((p) => p.category === n)),
+    ...[...new Set(active.map((p) => p.category))].filter((n) => !categories.some((c) => c.name === n)),
+  ];
+  const selected = visible.find((p) => p.id === selectedId);
+  // Keys act on the open email first, then the selected row.
+  const current = (openPartner && !openPartner.rejected ? openPartner : undefined) ?? selected;
+
+  useEffect(() => {
+    if (selectedId) document.querySelector(`[data-row-id="${selectedId}"]`)?.scrollIntoView({ block: "nearest" });
+  }, [selectedId]);
+
+  function move(delta: number) {
+    if (!visible.length) return;
+    const i = visible.findIndex((p) => p.id === selectedId);
+    const next = i < 0 ? (delta > 0 ? 0 : visible.length - 1) : Math.max(0, Math.min(visible.length - 1, i + delta));
+    setSelectedId(visible[next].id);
+  }
+
+  function rejectCurrent() {
+    if (!current) return;
+    const i = visible.findIndex((p) => p.id === current.id);
+    const next = visible[i + 1] ?? visible[i - 1];
+    setRejected(current, true);
+    setSelectedId(next?.id ?? null);
+  }
+
+  function openLink(url: string | null | undefined) {
+    if (url) window.open(url, "_blank", "noopener,noreferrer");
+  }
+
+  const hasRows = visible.length > 0 && !shortcutsOpen;
   useHotkeys([
-    { keys: "mod+enter", allowInInput: true, handler: nextStep },
+    { keys: "mod+enter", allowInInput: true, enabled: !shortcutsOpen, handler: nextStep },
     {
       keys: "escape",
       allowInInput: true,
+      enabled: !shortcutsOpen,
       handler: (e) => {
         const el = e.target as HTMLElement;
         if (["INPUT", "TEXTAREA"].includes(el.tagName)) el.blur();
         else if (openId) setOpenId(null);
         else if (filter) applyFilter(null);
+        else if (selectedId) setSelectedId(null);
       },
     },
-    { keys: "c", enabled: !!openPartner?.email, handler: () => openPartner && copyEmail(openPartner) },
+    { keys: ["?", "shift+/"], enabled: !shortcutsOpen, handler: () => setShortcutsOpen(true) },
+    // ⌘K works from anywhere, including text fields, and toggles the sheet.
+    { keys: "mod+k", allowInInput: true, handler: () => setShortcutsOpen((o) => !o) },
+    {
+      keys: "/",
+      enabled: !shortcutsOpen,
+      handler: () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        urlInput.current?.focus();
+        urlInput.current?.select();
+      },
+    },
+    // Partner rows
+    { keys: ["j", "arrowdown"], enabled: hasRows, handler: () => move(1) },
+    { keys: ["k", "arrowup"], enabled: hasRows, handler: () => move(-1) },
+    { keys: ["enter", "o"], enabled: hasRows && !!selected, handler: () => selected && toggleRow(selected) },
+    {
+      keys: "e",
+      enabled: hasRows && !!current,
+      handler: () => {
+        if (!current) return;
+        if (openId !== current.id) toggleRow(current);
+        else if (!current.email) generateEmail(current);
+      },
+    },
+    { keys: "r", enabled: hasRows && !!current?.email, handler: () => current && generateEmail(current) },
+    { keys: "c", enabled: hasRows && !!current?.email, handler: () => current && copyEmail(current) },
+    { keys: "x", enabled: hasRows && !!current, handler: rejectCurrent },
+    { keys: "l", enabled: hasRows && !!current, handler: () => current && openLink(linkedinSearchUrl(current)) },
+    {
+      keys: "w",
+      enabled: hasRows && !!current,
+      handler: () => current && openLink(current.website ?? current.source_url),
+    },
+    // List
+    {
+      keys: ["1", "2", "3", "4", "5", "6", "7", "8", "9"],
+      enabled: active.length > 0 && !shortcutsOpen,
+      handler: (e) => {
+        const name = filterOrder[Number(e.key) - 1];
+        if (name) applyFilter(filter === name ? null : name);
+      },
+    },
+    { keys: "0", enabled: !!filter && !shortcutsOpen, handler: () => applyFilter(null) },
+    { keys: "f", enabled: partners.length > 0 && !busy && !shortcutsOpen, handler: findMore },
+    {
+      keys: "shift+e",
+      enabled: active.length > 0 && !shortcutsOpen,
+      handler: () => downloadCsv(profile, active),
+    },
   ]);
 
   const errorFor = (step: Step) => (error?.step === step ? error.message : undefined);
@@ -300,8 +462,16 @@ export default function Home() {
               <span className="truncate text-[13px] text-muted-foreground">{profile.company_name}</span>
             </>
           )}
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => setShortcutsOpen(true)}
+            className="ml-auto text-[12px] text-muted-foreground"
+          >
+            <Keyboard /> Shortcuts <Shortcut keys="mod+k" />
+          </Button>
           {profile && (
-            <Button variant="ghost" size="sm" onClick={reset} disabled={busy !== null} className="ml-auto text-[12px] text-muted-foreground">
+            <Button variant="ghost" size="sm" onClick={reset} disabled={busy !== null} className="text-[12px] text-muted-foreground">
               <RotateCcw /> Start over
             </Button>
           )}
@@ -320,6 +490,7 @@ export default function Home() {
           >
             <Globe className="size-4 shrink-0 text-muted-foreground" />
             <input
+              ref={urlInput}
               autoFocus
               value={url}
               onChange={(e) => setUrl(e.target.value)}
@@ -339,6 +510,8 @@ export default function Home() {
             ) : (
               <span className="flex items-center gap-1.5 text-[12px] text-tertiary-foreground">
                 <Shortcut keys="mod+enter" /> runs the next step
+                <span className="mx-1.5">·</span>
+                <Shortcut keys="mod+k" /> all shortcuts
               </span>
             )}
           </div>
@@ -483,8 +656,8 @@ export default function Home() {
           <Section
             step={3}
             transitionName="partners"
-            title={filter ? `${visible.length} of ${partners.length} partners` : `${partners.length} potential partners`}
-            hint={filter ? undefined : "Click a row for an outreach draft, or a category to filter."}
+            title={filter ? `${visible.length} of ${active.length} partners` : `${active.length} potential partners`}
+            hint={filter ? undefined : "Click a row (or J/K and ↵) for an outreach draft, or a category to filter."}
             action={
               <>
                 {filter && (
@@ -498,15 +671,36 @@ export default function Home() {
                     <X className="size-3.5 shrink-0 text-muted-foreground" />
                   </button>
                 )}
-                <Button variant="outline" size="sm" className="h-7 rounded-md text-[12px]" onClick={() => downloadCsv(profile, partners)}>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="h-7 rounded-md text-[12px]"
+                  onClick={findMore}
+                  disabled={busy !== null}
+                  title={filter ? `Search deeper for more ${filter}` : "Search deeper across every category"}
+                >
+                  {busy === "more" ? <Loader2 className="animate-spin" /> : <Plus />}
+                  {busy === "more" ? "Finding more…" : "Find more"}
+                  <Shortcut keys="f" className="ml-0.5" />
+                </Button>
+                <Button variant="outline" size="sm" className="h-7 rounded-md text-[12px]" onClick={() => downloadCsv(profile, active)}>
                   <Download /> Export CSV
+                  <Shortcut keys="shift+e" className="ml-0.5" />
                 </Button>
               </>
             }
           >
-            {errorFor("email") && (
+            {busy === "more" && (
               <div className="border-b border-border px-4 py-2.5">
-                <ErrorLine message={errorFor("email")} />
+                <Status>
+                  Searching deeper {filter ? `for ${filter}` : "across every category"}, skipping the {partners.length}{" "}
+                  companies already listed · <Elapsed since={busySince} />
+                </Status>
+              </div>
+            )}
+            {(errorFor("email") || errorFor("more")) && (
+              <div className="border-b border-border px-4 py-2.5">
+                <ErrorLine message={errorFor("email") ?? errorFor("more")} />
               </div>
             )}
             <div className="overflow-x-auto">
@@ -517,7 +711,8 @@ export default function Home() {
                     <th className="w-[200px] font-medium">Company</th>
                     <th className="w-[220px] font-medium">Category</th>
                     <th className="font-medium">Why they&apos;d care</th>
-                    <th className="w-[160px] pr-4 font-medium">Contact</th>
+                    <th className="w-[170px] pr-2 font-medium">Contact</th>
+                    <th className="w-10 pr-3" aria-label="Actions" />
                   </tr>
                 </thead>
                 <tbody>
@@ -528,10 +723,12 @@ export default function Home() {
                       <Fragment key={p.id}>
                         <tr
                           onClick={() => toggleRow(p)}
+                          data-row-id={p.id}
                           style={{ viewTransitionName: `row-${p.id}` }}
                           className={cn(
-                            "cursor-pointer border-t border-border/70 align-top transition-colors hover:bg-row-hover",
-                            open && "bg-row-selected hover:bg-row-selected",
+                            "group scroll-mt-14 scroll-mb-4 cursor-pointer border-t border-border/70 align-top transition-colors hover:bg-row-hover",
+                            (open || selectedId === p.id) && "bg-row-selected hover:bg-row-selected",
+                            selectedId === p.id && "shadow-[inset_2px_0_0_var(--color-primary)]",
                           )}
                         >
                           <td className="py-3 pl-4">
@@ -562,18 +759,47 @@ export default function Home() {
                                 e.stopPropagation();
                                 applyFilter(filter === p.category ? null : p.category);
                               }}
-                              title={filter === p.category ? "Show all categories" : "Show only this category"}
+                              title={
+                                filter === p.category
+                                  ? "Show all categories (0)"
+                                  : `Show only this category (${filterOrder.indexOf(p.category) + 1})`
+                              }
                               className="cursor-default rounded-xl text-left transition-colors hover:[&>span]:border-[#3b3e45] hover:[&>span]:text-foreground"
                             >
                               <Label name={p.category} color={colorOf(p.category)} />
                             </button>
                           </td>
                           <td className="py-3 pr-4 leading-[1.55] text-[#d0d6e0]">{p.why}</td>
-                          <td className="py-3 pr-4 text-muted-foreground">{p.contact_role}</td>
+                          <td className="py-3 pr-2">
+                            <div className="text-muted-foreground">{p.contact_role}</div>
+                            <a
+                              href={linkedinSearchUrl(p)}
+                              target="_blank"
+                              rel="noreferrer"
+                              onClick={(e) => e.stopPropagation()}
+                              title={`Search LinkedIn for ${p.contact_role} at ${p.name}`}
+                              className="mt-0.5 inline-flex items-center gap-1 text-[12px] text-tertiary-foreground hover:text-muted-foreground"
+                            >
+                              <UserSearch className="size-3" /> Find on LinkedIn
+                            </a>
+                          </td>
+                          <td className="py-2.5 pr-3 text-right">
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setRejected(p, true);
+                              }}
+                              title="Not a fit (X): hide it, leave it out of exports, skip it in future searches"
+                              aria-label={`Mark ${p.name} as not a fit`}
+                              className="grid size-7 place-items-center rounded-md text-tertiary-foreground opacity-0 transition-opacity group-hover:opacity-100 hover:bg-accent hover:text-foreground focus-visible:opacity-100"
+                            >
+                              <ThumbsDown className="size-3.5" />
+                            </button>
+                          </td>
                         </tr>
                         {open && (
                           <tr className="bg-row-selected" style={{ viewTransitionName: `email-${p.id}` }}>
-                            <td colSpan={5} className="px-4 pb-4">
+                            <td colSpan={6} className="px-4 pb-4">
                               <div className="rounded-lg border border-border bg-background">
                                 <div className="flex flex-wrap items-center gap-2 border-b border-border px-3 py-2 text-[12px]">
                                   <span className="text-tertiary-foreground">Found in</span>
@@ -590,12 +816,21 @@ export default function Home() {
                                     <Button
                                       variant="ghost"
                                       size="sm"
+                                      onClick={() => setRejected(p, true)}
+                                      className="h-7 rounded-md text-[12px] text-muted-foreground"
+                                    >
+                                      <ThumbsDown /> Not a fit <Shortcut keys="x" className="ml-0.5" />
+                                    </Button>
+                                    <Button
+                                      variant="ghost"
+                                      size="sm"
                                       onClick={() => generateEmail(p)}
                                       disabled={drafting === p.id}
                                       className="h-7 rounded-md text-[12px] text-muted-foreground"
                                     >
                                       <RefreshCw className={cn(drafting === p.id && "animate-spin")} />
                                       {p.email ? "Regenerate" : "Draft email"}
+                                      <Shortcut keys={p.email ? "r" : "e"} className="ml-0.5" />
                                     </Button>
                                     <Button
                                       size="sm"
@@ -646,12 +881,29 @@ export default function Home() {
                 </tbody>
               </table>
             </div>
+            {rejected.length > 0 && (
+              <div className="flex flex-wrap items-center gap-1.5 border-t border-border px-4 py-3 text-[12px]">
+                <span className="mr-1 text-tertiary-foreground">Not a fit ({rejected.length})</span>
+                {rejected.map((p) => (
+                  <button
+                    key={p.id}
+                    onClick={() => setRejected(p, false)}
+                    title={`Restore ${p.name}`}
+                    className="inline-flex h-6 items-center gap-1.5 rounded-md border border-border px-2 text-muted-foreground line-through decoration-tertiary-foreground hover:text-foreground hover:no-underline"
+                  >
+                    {p.name}
+                    <Undo2 className="size-3" />
+                  </button>
+                ))}
+              </div>
+            )}
             {searchNote && (
               <p className="border-t border-border px-4 py-3 text-[12px] text-tertiary-foreground">{searchNote}</p>
             )}
           </Section>
         )}
       </main>
+      <ShortcutsSheet open={shortcutsOpen} onOpenChange={setShortcutsOpen} />
     </div>
   );
 }

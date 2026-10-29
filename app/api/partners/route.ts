@@ -1,11 +1,14 @@
 import { z } from "zod";
 import { errorResponse, structured, UserFacingError } from "@/lib/llm";
 import { domainOf, search, type SearchResult } from "@/lib/search";
-import type { Category, Partner, Profile } from "@/lib/types";
+import type { Category, Exclusions, Partner, Profile } from "@/lib/types";
 
 export const maxDuration = 300;
 
 const MAX_CANDIDATES = 90;
+const RESULTS_PER_QUERY = 8;
+// "Find more" digs deeper into each query, skipping companies already known.
+const MORE_RESULTS_PER_QUERY = 15;
 const SNIPPET_CHARS = 450;
 
 const PartnersSchema = z.object({
@@ -73,10 +76,20 @@ function isOwnSite(name: string, url: string): boolean {
   return (!!token && host.includes(token)) || (compactName.length >= 4 && host.includes(compactName));
 }
 
-async function gatherCandidates(profile: Profile, categories: Category[]) {
+async function gatherCandidates(
+  profile: Profile,
+  categories: Category[],
+  exclude: Exclusions,
+  more: boolean,
+) {
+  const excludeDomains = exclude.domains.map(domainOf).filter(Boolean);
   const jobs = categories.flatMap((cat) =>
-    cat.queries.slice(0, 2).map(async (q) => {
-      const results = await search(q, { num: 8, companiesOnly: true }).catch((e) => {
+    cat.queries.filter((q) => q.trim()).slice(0, 3).map(async (q) => {
+      const results = await search(q, {
+        num: more ? MORE_RESULTS_PER_QUERY : RESULTS_PER_QUERY,
+        companiesOnly: true,
+        excludeDomains,
+      }).catch((e) => {
         console.error(`search failed for "${q}":`, e);
         return [] as SearchResult[];
       });
@@ -109,14 +122,18 @@ async function gatherCandidates(profile: Profile, categories: Category[]) {
 
 export async function POST(req: Request) {
   try {
-    const { profile, categories } = (await req.json()) as {
-      profile: Profile;
-      categories: Category[];
-    };
+    const { profile, categories, exclude = { domains: [], names: [] }, more = false } =
+      (await req.json()) as {
+        profile: Profile;
+        categories: Category[];
+        exclude?: Exclusions;
+        more?: boolean;
+      };
     if (!categories?.length) throw new UserFacingError("Add at least one category.");
 
-    const candidates = await gatherCandidates(profile, categories);
+    const candidates = await gatherCandidates(profile, categories, exclude, more);
     if (!candidates.length) {
+      if (more) return Response.json({ partners: [], candidateCount: 0, dropped: 0 });
       throw new UserFacingError("Search returned no results. Try editing the category queries.");
     }
 
@@ -147,26 +164,35 @@ ${categoryText}
 <search_results>
 ${resultsText}
 </search_results>
-
-Pick 15-30 partner companies from these results (fewer if the results don't support that many good ones), best fit first.`,
+${
+  exclude.names.length
+    ? `\n<skip_companies>\nAlready found or rejected. Never pick these, under any spelling:\n${exclude.names.join("\n")}\n</skip_companies>\n`
+    : ""
+}
+${
+  more
+    ? "Pick up to 15 additional partner companies from these results that are not in skip_companies. Fewer, or none, if the results don't support good ones."
+    : "Pick 15-30 partner companies from these results (fewer if the results don't support that many good ones), best fit first."
+}`,
       effort: "medium",
     });
 
     const byId = new Map(candidates.map((c) => [c.id, c]));
-    const seen = new Set<string>();
+    const seen = new Set<string>(exclude.names.map(norm));
     const partners: Partner[] = [];
     let dropped = 0;
 
     for (const p of picks) {
       const c = byId.get(p.candidate_id);
       const key = norm(p.name);
-      if (!c || !nameAppearsIn(p.name, c) || seen.has(key)) {
+      if (seen.has(key)) continue; // a duplicate, or a company we were told to skip
+      if (!c || !nameAppearsIn(p.name, c)) {
         dropped++;
         continue;
       }
       seen.add(key);
       partners.push({
-        id: `${key.replace(/ /g, "-")}-${partners.length}`,
+        id: `${key.replace(/ /g, "-")}-${crypto.randomUUID().slice(0, 8)}`,
         name: p.name,
         category: p.category,
         fit_score: Math.max(1, Math.min(10, p.fit_score)),

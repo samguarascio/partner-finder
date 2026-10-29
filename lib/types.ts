@@ -37,6 +37,14 @@ export interface Partner {
   source_title: string;
   evidence: string;
   email?: Email;
+  // Marked "not a fit": hidden, left out of exports, excluded from later searches.
+  rejected?: boolean;
+}
+
+// Companies a search should skip: already found, or marked not a fit.
+export interface Exclusions {
+  domains: string[];
+  names: string[];
 }
 
 export interface ApiError {

@@ -50,6 +50,10 @@ export function useHotkeys(bindings: Hotkey[]) {
       for (const b of ref.current) {
         if (b.enabled === false || (typing && !b.allowInInput)) continue;
         for (const combo of Array.isArray(b.keys) ? b.keys : [b.keys]) {
+          // Leave Enter and Space to the focused button or link.
+          if ((combo === "enter" || combo === "space") && (e.target as HTMLElement)?.closest?.("button, a, [role='button']")) {
+            continue;
+          }
           const steps = combo.split(" ");
           if (steps.length === 2) {
             if (pending === steps[0] && matches(steps[1], e)) {

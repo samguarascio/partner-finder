@@ -20,17 +20,24 @@ export function searchProvider(): "exa" | "tavily" | "serper" {
 
 export async function search(
   query: string,
-  opts: { num?: number; companiesOnly?: boolean } = {},
+  opts: { num?: number; companiesOnly?: boolean; excludeDomains?: string[] } = {},
 ): Promise<SearchResult[]> {
   const num = opts.num ?? 8;
+  const exclude = opts.excludeDomains ?? [];
+  let results: SearchResult[];
   switch (searchProvider()) {
     case "exa":
-      return exa(query, num, opts.companiesOnly ?? false);
+      results = await exa(query, num, opts.companiesOnly ?? false, exclude);
+      break;
     case "tavily":
-      return tavily(query, num);
+      results = await tavily(query, num, exclude);
+      break;
     case "serper":
-      return serper(query, num);
+      results = await serper(query, num);
+      break;
   }
+  // Serper can't exclude domains, and the others may still slip one through.
+  return exclude.length ? results.filter((r) => !exclude.includes(domainOf(r.url))) : results;
 }
 
 async function postJson(url: string, headers: Record<string, string>, body: unknown) {
@@ -47,7 +54,12 @@ async function postJson(url: string, headers: Record<string, string>, body: unkn
   return res.json();
 }
 
-async function exa(query: string, num: number, companiesOnly: boolean): Promise<SearchResult[]> {
+async function exa(
+  query: string,
+  num: number,
+  companiesOnly: boolean,
+  excludeDomains: string[],
+): Promise<SearchResult[]> {
   const data = await postJson(
     "https://api.exa.ai/search",
     { "x-api-key": process.env.EXA_API_KEY! },
@@ -56,6 +68,7 @@ async function exa(query: string, num: number, companiesOnly: boolean): Promise<
       type: "auto",
       numResults: num,
       ...(companiesOnly ? { category: "company" } : {}),
+      ...(excludeDomains.length ? { excludeDomains } : {}),
       contents: { text: { maxCharacters: 800 } },
     },
   );
@@ -66,11 +79,16 @@ async function exa(query: string, num: number, companiesOnly: boolean): Promise<
   }));
 }
 
-async function tavily(query: string, num: number): Promise<SearchResult[]> {
+async function tavily(query: string, num: number, excludeDomains: string[]): Promise<SearchResult[]> {
   const data = await postJson(
     "https://api.tavily.com/search",
     { Authorization: `Bearer ${process.env.TAVILY_API_KEY}` },
-    { query, max_results: num, search_depth: "basic" },
+    {
+      query,
+      max_results: num,
+      search_depth: "basic",
+      ...(excludeDomains.length ? { exclude_domains: excludeDomains } : {}),
+    },
   );
   return (data.results ?? []).map((r: { title?: string; url: string; content?: string }) => ({
     title: r.title ?? "",
